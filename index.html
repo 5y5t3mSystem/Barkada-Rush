@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barkada Rush</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="start" class="screen">
+  <div class="logo">
+    <div class="line1">BARKADA</div>
+    <div class="line2">RUSH</div>
+  </div>
+
+  <div class="cluster" aria-hidden="true">
+    <img class="c-yellow" src="assets/images/star_yellow.png" alt="">
+    <img class="c-pink" src="assets/images/triangle_pink.png" alt="">
+    <img class="c-blue" src="assets/images/star_blue.png" alt="">
+    <img class="c-purple" src="assets/images/star_purple.png" alt="">
+    <img class="c-green" src="assets/images/clover_green.png" alt="">
+    <img class="c-red" src="assets/images/square_red.png" alt="">
+  </div>
+
+  <div class="menu">
+    <button class="btn-main" onclick="openModal('createModal')">CREATE LOBBY</button>
+    <button class="btn-main" onclick="openModal('joinModal')">JOIN LOBBY</button>
+  </div>
+  <button class="btn-howto" onclick="openModal('howtoModal')">How to Play?</button>
+</div>
+
+<!-- CREATE LOBBY MODAL -->
+<div class="overlay hidden" id="createModal">
+  <div class="modal lobby-modal" role="dialog" aria-label="Create Lobby">
+    <h2 class="lobby-title">HOW MANY<br>PLAYERS?</h2>
+
+    <div class="lobby-cluster lobby-cluster--create" id="playerCluster" aria-hidden="true">
+      <img class="lc-green  is-visible" data-min="3" src="assets/images/lobby/char_clover_green.png" alt="">
+      <img class="lc-red    is-visible" data-min="3" src="assets/images/lobby/char_square_red.png" alt="">
+      <img class="lc-blue   is-visible" data-min="3" src="assets/images/lobby/char_star_blue.png" alt="">
+      <img class="lc-purple" data-min="4" src="assets/images/lobby/char_star_purple.png" alt="">
+      <img class="lc-pink"   data-min="5" src="assets/images/lobby/char_triangle_pink.png" alt="">
+      <img class="lc-yellow" data-min="6" src="assets/images/lobby/char_circle_yellow.png" alt="">
+    </div>
+
+    <div class="counter">
+      <button type="button" class="counter-btn" id="playerMinus" aria-label="Decrease player count">&minus;</button>
+      <span class="counter-val" id="playerCount">3</span>
+      <button type="button" class="counter-btn" id="playerPlus" aria-label="Increase player count">&plus;</button>
+    </div>
+
+    <div class="soon soon--lobby">COMING SOON</div>
+    <p class="sub">Creating your own barkada game room is on the way in a future update!</p>
+    <button class="btn-back" onclick="closeModal('createModal')">BACK</button>
+  </div>
+</div>
+
+<!-- JOIN LOBBY MODAL -->
+<div class="overlay hidden" id="joinModal">
+  <div class="modal lobby-modal" role="dialog" aria-label="Join Lobby">
+    <h2 class="lobby-title">JOIN LOBBY</h2>
+
+    <div class="lobby-cluster lobby-cluster--join" aria-hidden="true">
+      <img class="lj-yellow" src="assets/images/lobby/char_circle_yellow.png" alt="">
+      <img class="lj-purple" src="assets/images/lobby/char_star_purple.png" alt="">
+      <img class="lj-red" src="assets/images/lobby/char_square_red.png" alt="">
+      <img class="lj-pink" src="assets/images/lobby/char_triangle_pink.png" alt="">
+      <img class="lj-blue" src="assets/images/lobby/char_star_blue.png" alt="">
+      <img class="lj-green" src="assets/images/lobby/char_clover_green.png" alt="">
+    </div>
+
+    <form id="joinForm" autocomplete="off" onsubmit="return false;">
+      <div class="code-label">CODE</div>
+      <input class="code-input" id="joinCode" type="text" inputmode="text" maxlength="6" placeholder="ENTER CODE" aria-label="Lobby code">
+      <button type="submit" class="btn-main btn-join-submit">JOIN LOBBY</button>
+    </form>
+
+    <div class="soon soon--lobby">COMING SOON</div>
+    <p class="sub">Joining your barkada's game room is on the way in a future update!</p>
+    <button class="btn-back" onclick="closeModal('joinModal')">BACK</button>
+  </div>
+</div>
+
+<!-- HOW TO PLAY MODAL -->
+<div class="overlay hidden" id="howtoModal">
+  <div class="modal" role="dialog" aria-label="How to Play" style="text-align:left;">
+    <h2 class="howto-title" style="text-align:center;">HOW TO PLAY</h2>
+    <p class="howto-intro" style="text-align:center;">Barkada Rush is a multiplayer party game made for friends, classmates, and groups — perfect for game nights, hangouts, and barkada gatherings.</p>
+
+    <div class="step">
+      <div class="step-icon"><i class="fa-solid fa-door-open"></i></div>
+      <div><div class="step-num">01 — CREATE OR JOIN A LOBBY</div>
+        <p>Players can create a game room or join an existing one. Future versions will use a room code or QR code to make joining easier.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="fa-solid fa-people-group"></i></div>
+      <div><div class="step-num">02 — GET YOUR BARKADA TOGETHER</div>
+        <p>Once everyone joins the same room, everyone can play together — the game stays synced for all players.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="fa-solid fa-square-poll-vertical"></i></div>
+      <div><div class="step-num">03 — ANSWER AND VOTE</div>
+        <p>The game presents questions, polls, and fun challenges. Players answer or vote depending on the round.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="fa-solid fa-trophy"></i></div>
+      <div><div class="step-num">04 — WHO GETS THE MOST VOTES?</div>
+        <p>The player with the most votes becomes the selected player for the challenge.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="fa-solid fa-layer-group"></i></div>
+      <div><div class="step-num">05 — PICK 1 OF 5 CARDS</div>
+        <p>The selected player picks one of five cards. Each card has a different challenge or activity to do.</p></div>
+    </div>
+    <div class="step">
+      <div class="step-icon"><i class="fa-solid fa-face-grin-stars"></i></div>
+      <div><div class="step-num">06 — HAVE FUN WITH YOUR BARKADA</div>
+        <p>Keep playing through rounds of questions, votes, and challenges with your barkada!</p></div>
+    </div>
+
+    <div style="text-align:center; margin-top:6px;">
+      <button class="btn-back" onclick="closeModal('howtoModal')">BACK</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

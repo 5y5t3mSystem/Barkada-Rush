@@ -1,0 +1,448 @@
+:root {
+  --ink: #2b2b2b;
+  --accent-purple: #6b4fa0;
+  --accent-pink: #ff5f96;
+  --card-shadow: rgba(0,0,0,0.18);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  font-family: 'Baloo 2', sans-serif;
+  background: radial-gradient(circle at 50% -10%, #fffbe0 0%, #fff6b8 28%, #f3f08a 55%, #d9ec7a 100%);
+  color: var(--ink);
+  overflow-x: hidden;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.screen {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 16px 40px;
+}
+.hidden { display: none !important; }
+
+/* ---- Title ---- */
+.logo {
+  font-family: 'Luckiest Guy', cursive;
+  text-align: center;
+  line-height: 0.95;
+  margin: 8px 0 6px;
+  letter-spacing: 1px;
+  animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) both;
+}
+.logo .line1 {
+  font-size: clamp(34px, 9vw, 58px);
+  color: #ffffff;
+  -webkit-text-stroke: 2.5px #2b2b2b;
+  paint-order: stroke fill;
+  text-shadow: 0 4px 0 rgba(0,0,0,0.12);
+}
+.logo .line2 {
+  font-size: clamp(46px, 12vw, 78px);
+  background: linear-gradient(180deg, #ffe066, #ff9d3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2.5px #2b2b2b;
+  paint-order: stroke fill;
+}
+
+/* ---- Character cluster ---- */
+.cluster {
+  position: relative;
+  width: min(96vw, 480px);
+  aspect-ratio: 15 / 10;
+  margin: 4px auto 6px;
+}
+.cluster img {
+  position: absolute;
+  filter: drop-shadow(0 8px 12px var(--card-shadow));
+  opacity: 0;
+  animation: floatIn 0.6s ease-out forwards, bob 3.6s ease-in-out infinite;
+}
+.c-yellow  { width: 34%; left: -2%; top: 18%; --rot:-6deg; animation-delay: 0.05s, 0.65s; z-index: 2; }
+.c-pink    { width: 30%; left: 2%;  top: 50%; --rot:-2deg; animation-delay: 0.15s, 0.75s; z-index: 2; }
+.c-blue    { width: 38%; left: 24%; top: 46%; --rot:-3deg; animation-delay: 0.0s, 0.6s; z-index: 4; }
+.c-purple  { width: 36%; left: 28%; top: 2%;  --rot:4deg;  animation-delay: 0.25s, 0.85s; z-index: 5; }
+.c-green   { width: 34%; left: 58%; top: 12%; --rot:6deg;  animation-delay: 0.1s, 0.7s; z-index: 3; }
+.c-red     { width: 36%; left: 60%; top: 48%; --rot:3deg;  animation-delay: 0.2s, 0.8s; z-index: 2; }
+
+@keyframes floatIn {
+  from { opacity: 0; transform: translateY(18px) rotate(var(--rot)) scale(0.85); }
+  to   { opacity: 1; transform: translateY(0) rotate(var(--rot)) scale(1); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+  50%      { transform: translateY(-8px) rotate(var(--rot)); }
+}
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.7); }
+  70%  { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---- Buttons ---- */
+.menu {
+  width: min(90vw, 380px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 8px;
+  align-items: center;
+}
+.btn-main {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(22px, 6vw, 30px);
+  letter-spacing: 1px;
+  color: #2b2b2b;
+  background: #ffffff;
+  border: 3px solid #2b2b2b;
+  border-radius: 16px;
+  padding: 14px 10px;
+  width: 100%;
+  min-height: 56px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #2b2b2b;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+  opacity: 0;
+  animation: riseIn 0.5s ease-out forwards;
+}
+.menu .btn-main:nth-child(1) { animation-delay: 0.5s; }
+.menu .btn-main:nth-child(2) { animation-delay: 0.6s; }
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.btn-main:hover { background: #fff6e0; transform: translateY(-2px); box-shadow: 0 7px 0 #2b2b2b; }
+.btn-main:active, .btn-main.pressed {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 #2b2b2b;
+}
+.btn-main:focus-visible { outline: 3px solid var(--accent-purple); outline-offset: 2px; }
+
+.btn-howto {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: clamp(15px, 4vw, 18px);
+  color: #ffffff;
+  background: var(--accent-purple);
+  border: 2px solid #2b2b2b;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 14px;
+  padding: 9px 22px;
+  box-shadow: 0 3px 0 #2b2b2b;
+  opacity: 0;
+  animation: riseIn 0.5s ease-out forwards;
+  animation-delay: 0.7s;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-howto:hover { transform: translateY(-2px); }
+.btn-howto:active { transform: translateY(3px); box-shadow: 0 0 0 #2b2b2b; }
+.btn-howto:focus-visible { outline: 2px solid #2b2b2b; }
+
+/* ---- Modal (Coming Soon / How to Play) ---- */
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(40,30,10,0.5);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  z-index: 50;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  animation: fadeIn 0.2s ease-out;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  background: linear-gradient(180deg, #fffdf3, #ffffff);
+  border: 3px solid #2b2b2b;
+  border-radius: 24px;
+  width: min(92vw, 420px);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px 22px 22px;
+  text-align: center;
+  box-shadow: 0 10px 0 rgba(0,0,0,0.15);
+  animation: modalPop 0.28s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.85) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-icon {
+  width: 96px; height: 96px;
+  margin: 0 auto 10px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: #ffe9a8;
+  border: 3px solid #2b2b2b;
+  animation: bob 2.6s ease-in-out infinite;
+}
+.modal-icon i { font-size: 44px; color: var(--accent-pink); }
+.modal h2 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(22px, 6vw, 28px);
+  margin: 4px 0 2px;
+  letter-spacing: 1px;
+  color: #2b2b2b;
+}
+.modal .soon {
+  /* Same treatment as the "RUSH" wordmark in the title logo */
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(26px, 7vw, 34px);
+  background: linear-gradient(180deg, #ffe066, #ff9d3d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 2px #2b2b2b;
+  paint-order: stroke fill;
+  text-shadow: 0 4px 0 rgba(0,0,0,0.12);
+  margin: 4px 0 12px;
+}
+.modal p.sub {
+  font-size: 15px;
+  color: #3a3a3a;
+  margin: 0 0 18px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.btn-back {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #2b2b2b;
+  background: #ffd23f;
+  border: 3px solid #2b2b2b;
+  border-radius: 14px;
+  padding: 10px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #2b2b2b;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.btn-back:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #2b2b2b; }
+.btn-back:active { transform: translateY(4px); box-shadow: 0 0 0 #2b2b2b; }
+.btn-back:focus-visible { outline: 3px solid var(--accent-purple); outline-offset: 2px; }
+
+/* ---- How to Play ---- */
+.howto-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(24px, 6vw, 30px);
+  margin: 0 0 4px;
+  color: #2b2b2b;
+}
+.howto-intro {
+  font-size: 14px; color: #3a3a3a; margin: 0 0 18px; line-height: 1.5; font-weight: 600;
+}
+.step {
+  display: flex; align-items: flex-start; gap: 14px;
+  text-align: left;
+  background: #fffaf0;
+  border: 2.5px solid #f0cf6e;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  transition: transform 0.15s ease;
+}
+.step:hover { transform: translateY(-2px); }
+.step-icon {
+  flex: 0 0 auto;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: #ffd23f;
+  border: 3px solid #2b2b2b;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+}
+.step-icon i { font-size: 28px; color: #2b2b2b; }
+.step-num {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 14px;
+  color: var(--accent-purple);
+  letter-spacing: 1px;
+}
+.step h3 {
+  margin: 2px 0 4px;
+  font-size: 16px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+}
+.step p { margin: 0; font-size: 13.5px; color: #3a3a3a; line-height: 1.4; font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* ---- Create / Join Lobby screens ---- */
+.lobby-modal {
+  padding-top: 24px;
+}
+.lobby-title {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(22px, 6.5vw, 30px);
+  line-height: 1.15;
+  letter-spacing: 1px;
+  color: #2b2b2b;
+  margin: 2px 0 10px;
+}
+.lobby-cluster {
+  position: relative;
+  width: min(82%, 300px);
+  margin: 4px auto 14px;
+}
+.lobby-cluster img {
+  position: absolute;
+  filter: drop-shadow(0 6px 10px var(--card-shadow));
+  opacity: 0;
+  animation: floatIn 0.55s ease-out forwards, bob 3.6s ease-in-out infinite;
+}
+/* Create Lobby: up to 6 player icons that reflow in normal document flow
+   (flex-wrap), so the cluster's height always matches however many icons
+   are actually showing — no reserved empty space for hidden ones.
+   .is-visible toggles display, so the count updates instantly and the
+   layout below (counter / Coming Soon / description / Back) naturally
+   moves up to fill the freed space. */
+.lobby-cluster--create {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(4px, 1.8vw, 14px);
+  width: min(90%, 320px);
+  margin: 0 auto;
+}
+.lobby-cluster--create img {
+  position: static;
+  display: none;
+  opacity: 1;
+  width: clamp(58px, 24vw, 96px);
+  height: auto;
+  animation: none;
+  --rot: -4deg;
+}
+.lobby-cluster--create img.is-visible {
+  display: block;
+  animation: bob 3.6s ease-in-out infinite;
+}
+.lobby-cluster--create .lc-green  { --rot:-8deg; }
+.lobby-cluster--create .lc-red    { --rot:6deg; }
+.lobby-cluster--create .lc-blue   { --rot:-3deg; }
+.lobby-cluster--create .lc-purple { --rot:5deg; }
+.lobby-cluster--create .lc-pink   { --rot:-6deg; }
+.lobby-cluster--create .lc-yellow { --rot:4deg; }
+
+/* Viewport-aware vertical rhythm for Create Lobby only — spacing compresses
+   on short viewports (e.g. landscape phones) and relaxes on tall ones,
+   instead of using fixed px gaps between the icons, counter, Coming Soon,
+   description and Back button. */
+#createModal .lobby-title { margin: 0 0 clamp(6px, 1.6vh, 10px); }
+#createModal .lobby-cluster--create { margin: 0 auto clamp(6px, 1.6vh, 14px); }
+#createModal .counter { margin: clamp(2px, 0.8vh, 4px) auto clamp(8px, 2vh, 16px); }
+#createModal .soon { margin: clamp(2px, 0.6vh, 4px) 0 clamp(6px, 1.6vh, 12px); }
+#createModal .sub { margin: 0 0 clamp(10px, 2.2vh, 18px); }
+/* Join Lobby: 6-character cluster, two loose rows */
+.lobby-cluster--join { aspect-ratio: 1 / 0.82; }
+.lobby-cluster--join .lj-yellow { width: 30%; left: 0%;   top: 18%; --rot:-8deg; animation-delay: 0.0s,  0.55s; z-index: 2; }
+.lobby-cluster--join .lj-pink   { width: 28%; left: 8%;   top: 56%; --rot:-6deg; animation-delay: 0.1s,  0.6s;  z-index: 2; }
+.lobby-cluster--join .lj-purple { width: 34%; left: 34%;  top: 0%;  --rot:2deg;  animation-delay: 0.05s, 0.5s; z-index: 4; }
+.lobby-cluster--join .lj-blue   { width: 32%; left: 34%;  top: 46%; --rot:-2deg; animation-delay: 0.3s,  0.75s; z-index: 5; }
+.lobby-cluster--join .lj-red    { width: 30%; right: 2%;  top: 16%; --rot:7deg;  animation-delay: 0.15s, 0.65s; z-index: 2; }
+.lobby-cluster--join .lj-green  { width: 28%; right: 8%;  top: 56%; --rot:5deg;  animation-delay: 0.2s,  0.7s;  z-index: 2; }
+
+/* Create Lobby decorative player counter */
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  width: min(78%, 220px);
+  margin: 2px auto 16px;
+  border: 3px solid #2b2b2b;
+  border-radius: 999px;
+  padding: 10px 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.12);
+}
+.counter-btn {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  width: 34px; height: 34px;
+  line-height: 30px;
+  text-align: center;
+  color: #2b2b2b;
+  background: #ffe9a8;
+  border: 2.5px solid #2b2b2b;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+}
+.counter-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.counter-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.15); }
+.counter-btn:focus-visible { outline: 3px solid var(--accent-purple); outline-offset: 2px; }
+.counter-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+.counter-val {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 24px;
+  color: #2b2b2b;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Join Lobby decorative code field */
+.code-label {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: clamp(16px, 4.5vw, 19px);
+  letter-spacing: 2px;
+  color: #2b2b2b;
+  margin-bottom: 6px;
+}
+.code-input {
+  display: block;
+  width: min(80%, 260px);
+  height: 46px;
+  margin: 0 auto 16px;
+  border: 3px solid #2b2b2b;
+  border-radius: 14px;
+  background: #fffdf3;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 18px;
+  letter-spacing: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #2b2b2b;
+  padding: 0 10px;
+  transition: box-shadow 0.12s ease, border-color 0.12s ease;
+}
+.code-input::placeholder {
+  font-family: 'Baloo 2', sans-serif;
+  letter-spacing: 1px;
+  font-size: 13px;
+  color: #9a9a8a;
+  text-transform: none;
+}
+.code-input:focus {
+  outline: none;
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 3px rgba(107,79,160,0.2);
+}
+.btn-join-submit {
+  width: min(80%, 260px);
+  margin: 0 auto 16px;
+  font-size: clamp(18px, 5vw, 22px);
+}
+
+.soon--lobby { margin-top: 2px; }
+
+@media (max-width: 360px) {
+  .lobby-cluster { width: 78%; }
+}
+
+/* Barkada Rush always stays bright and cheerful — no dark-mode override */
